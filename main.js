@@ -38,6 +38,7 @@ function createWindow() {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false,
+      webviewTag: true,
     },
   });
 
@@ -113,8 +114,8 @@ function registerIpcHandlers() {
   // Add a new item (sort_order = max + 1 so it goes to the end)
   ipcMain.handle('queue:addItem', (_event, item) => {
     const max = db.prepare('SELECT COALESCE(MAX(sort_order), -1) as m FROM queue_items').get().m;
-    const stmt = db.prepare('INSERT INTO queue_items (title, image_url, sort_order) VALUES (?, ?, ?)');
-    const result = stmt.run(item.title, item.image_url || null, max + 1);
+    const stmt = db.prepare('INSERT INTO queue_items (title, image_url, url, platform, sort_order) VALUES (?, ?, ?, ?, ?)');
+    const result = stmt.run(item.title, item.image_url || null, item.url || null, item.platform || null, max + 1);
     return { id: result.lastInsertRowid, ...item };
   });
 
@@ -137,7 +138,7 @@ function registerIpcHandlers() {
   });
 
   // Update an item (title and/or image)
-  ipcMain.handle('queue:updateItem', (_event, { id, title, image_url, removeOldImage }) => {
+  ipcMain.handle('queue:updateItem', (_event, { id, title, image_url, url, platform, removeOldImage }) => {
     // If we're replacing the image, clean up the old file
     if (removeOldImage) {
       const old = db.prepare('SELECT image_url FROM queue_items WHERE id = ?').get(id);
@@ -146,7 +147,7 @@ function registerIpcHandlers() {
         try { fs.unlinkSync(filePath); } catch (_) {}
       }
     }
-    db.prepare('UPDATE queue_items SET title = ?, image_url = ? WHERE id = ?').run(title, image_url || null, id);
+    db.prepare('UPDATE queue_items SET title = ?, image_url = ?, url = COALESCE(?, url), platform = COALESCE(?, platform) WHERE id = ?').run(title, image_url || null, url || null, platform || null, id);
     return db.prepare('SELECT * FROM queue_items WHERE id = ?').get(id);
   });
 
