@@ -1,13 +1,15 @@
 {
-  "name": "the-queue",
+  "name": "queue",
   "version": "1.0.0",
-  "description": "The Queue - Your personal media watchlist",
+  "description": "Queue - Your personal media watchlist",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
     "build:renderer": "vite build",
-    "build": "vite build && electron-builder",
+    "build": "vite build && electron-builder --publish never",
+    "dist": "vite build && electron-builder --publish never",
+    "release": "npm run dist && node scripts/generate-release-hash.js",
     "postinstall": "electron-builder install-app-deps"
   },
   "author": "Justin McGill",
@@ -27,17 +29,39 @@
     "react-dom": "^19.0.0"
   },
   "build": {
-    "appId": "com.justinmcgill.thequeue",
-    "productName": "The Queue",
+    "appId": "com.queue.app",
+    "productName": "Queue",
     "files": [
       "main.js",
       "preload.js",
       "database.js",
+      "auto-updater.js",
       "dist/**/*"
     ],
+    "directories": {
+      "output": "release"
+    },
     "mac": {
-      "target": "dmg",
-      "icon": "build/icon.icns"
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["x64", "arm64"]
+        },
+        {
+          "target": "zip",
+          "arch": ["x64", "arm64"]
+        }
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.entertainment"
+    },
+    "dmg": {
+      "title": "Queue",
+      "iconSize": 80,
+      "contents": [
+        { "x": 130, "y": 220 },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
     }
   }
 }

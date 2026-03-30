@@ -3,9 +3,10 @@ const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
 const { initDatabase, getDb } = require('./database');
+const { startAutoUpdater, stopAutoUpdater } = require('./auto-updater');
 
-// Set the app name so macOS dock/menu shows "The Queue" instead of "Electron"
-app.setName('The Queue');
+// Set the app name so macOS dock/menu shows "Queue" instead of "Electron"
+app.setName('Queue');
 
 let mainWindow;
 let imagesDir;
@@ -68,6 +69,7 @@ app.whenReady().then(() => {
 
   initDatabase();
   registerIpcHandlers();
+  startAutoUpdater();
   createWindow();
 
   app.on('activate', () => {
@@ -76,7 +78,10 @@ app.whenReady().then(() => {
 });
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') app.quit();
+  if (process.platform !== 'darwin') {
+    stopAutoUpdater();
+    app.quit();
+  }
 });
 
 function registerIpcHandlers() {

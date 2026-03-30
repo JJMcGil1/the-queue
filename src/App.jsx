@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import queueLogo from './assets/queue-logo.svg';
+import UpdateToast from './components/UpdateToast';
 
 export default function App() {
   const [items, setItems] = useState([]);
@@ -232,7 +233,7 @@ export default function App() {
           {filteredItems.map(item => (
             <div
               key={item.id}
-              className={`card ${draggedId === item.id ? 'card--dragging' : ''} ${dragOverId === item.id && draggedId !== item.id ? 'card--drag-over' : ''}`}
+              className={`card ${item.watched ? 'card--watched' : ''} ${draggedId === item.id ? 'card--dragging' : ''} ${dragOverId === item.id && draggedId !== item.id ? 'card--drag-over' : ''}`}
               draggable
               onDragStart={(e) => handleDragStart(e, item.id)}
               onDragEnd={handleDragEnd}
@@ -246,8 +247,18 @@ export default function App() {
                 <div className="card-placeholder" style={getImageSrc(item) ? { display: 'none' } : {}}>
                   🎬
                 </div>
+                {!!item.watched && (
+                  <div className="card-watched-badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                  </div>
+                )}
               </div>
-              <div className="card-title">{item.title}</div>
+              <div className="card-title">
+                {!!item.watched && <span className="card-title-check">✓</span>}
+                {item.title}
+              </div>
             </div>
           ))}
         </div>
@@ -375,6 +386,8 @@ export default function App() {
           </div>
         </div>
       )}
+
+      <UpdateToast />
     </div>
   );
 }
