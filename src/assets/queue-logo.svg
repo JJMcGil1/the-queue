@@ -1,0 +1,17 @@
+<svg width="260" height="260" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="qGrad" x1="40" y1="0" x2="400" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AF0FF"/>
+      <stop offset="12%" stop-color="#47D4FF"/>
+      <stop offset="24%" stop-color="#FFB347"/>
+      <stop offset="38%" stop-color="#FF8A50"/>
+      <stop offset="50%" stop-color="#FF5252"/>
+      <stop offset="62%" stop-color="#F04E6B"/>
+      <stop offset="74%" stop-color="#D63384"/>
+      <stop offset="86%" stop-color="#9B30D1"/>
+      <stop offset="100%" stop-color="#6A1FE8"/>
+    </linearGradient>
+  </defs>
+  <path d="M210 30A156 156 0 1 0 210 342A156 156 0 1 0 210 30ZM210 103A83 83 0 1 1 210 269A83 83 0 1 1 210 103Z" fill="url(#qGrad)" fill-rule="evenodd"/>
+  <line x1="236" y1="248" x2="314" y2="374" stroke="url(#qGrad)" stroke-width="73" stroke-linecap="round"/>
+</svg>

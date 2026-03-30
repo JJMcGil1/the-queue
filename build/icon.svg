@@ -1,0 +1,104 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- macOS squircle path (superellipse approximation) -->
+    <clipPath id="squircle">
+      <path d="M512 0C791.4 0 872.7 0 940.4 83.6C1024 167.3 1024 232.6 1024 512C1024 791.4 1024 856.7 940.4 940.4C856.7 1024 791.4 1024 512 1024C232.6 1024 167.3 1024 83.6 940.4C0 856.7 0 791.4 0 512C0 232.6 0 167.3 83.6 83.6C167.3 0 232.6 0 512 0Z"/>
+    </clipPath>
+
+    <linearGradient id="bg" x1="0" y1="0" x2="1024" y2="1024">
+      <stop offset="0%" stop-color="#12101C"/>
+      <stop offset="100%" stop-color="#0A0810"/>
+    </linearGradient>
+
+    <linearGradient id="qg" x1="200" y1="140" x2="780" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AF0FF"/>
+      <stop offset="12%" stop-color="#47D4FF"/>
+      <stop offset="24%" stop-color="#FFB347"/>
+      <stop offset="38%" stop-color="#FF8A50"/>
+      <stop offset="50%" stop-color="#FF5252"/>
+      <stop offset="62%" stop-color="#F04E6B"/>
+      <stop offset="74%" stop-color="#D63384"/>
+      <stop offset="86%" stop-color="#9B30D1"/>
+      <stop offset="100%" stop-color="#6A1FE8"/>
+    </linearGradient>
+
+    <linearGradient id="tg" x1="200" y1="140" x2="780" y2="820" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4AF0FF"/>
+      <stop offset="12%" stop-color="#47D4FF"/>
+      <stop offset="24%" stop-color="#FFB347"/>
+      <stop offset="38%" stop-color="#FF8A50"/>
+      <stop offset="50%" stop-color="#FF5252"/>
+      <stop offset="62%" stop-color="#F04E6B"/>
+      <stop offset="74%" stop-color="#D63384"/>
+      <stop offset="86%" stop-color="#9B30D1"/>
+      <stop offset="100%" stop-color="#6A1FE8"/>
+    </linearGradient>
+
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="45" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="80" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="tlift">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000" flood-opacity="0.5"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+
+    <radialGradient id="shine" cx="45%" cy="30%" r="50%" fx="40%" fy="25%">
+      <stop offset="0%" stop-color="#fff" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#fff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="tc">
+      <line x1="540" y1="575" x2="720" y2="840" stroke="black" stroke-width="165" stroke-linecap="round"/>
+    </clipPath>
+  </defs>
+
+  <!-- Everything clipped to squircle -->
+  <g clip-path="url(#squircle)">
+    <!-- Background -->
+    <rect width="1024" height="1024" fill="url(#bg)"/>
+    <rect width="1024" height="1024" fill="url(#bg)" opacity="0.5"/>
+
+    <!-- Wide ambient glow -->
+    <g opacity="0.2" filter="url(#glow3)">
+      <path d="M470 80A350 350 0 1 0 470 780A350 350 0 1 0 470 80ZM470 270A160 160 0 1 1 470 590A160 160 0 1 1 470 270Z" fill="url(#qg)" fill-rule="evenodd"/>
+      <line x1="540" y1="575" x2="720" y2="840" stroke="url(#qg)" stroke-width="170" stroke-linecap="round"/>
+    </g>
+
+    <!-- Medium glow -->
+    <g opacity="0.4" filter="url(#glow2)">
+      <path d="M470 80A350 350 0 1 0 470 780A350 350 0 1 0 470 80ZM470 270A160 160 0 1 1 470 590A160 160 0 1 1 470 270Z" fill="url(#qg)" fill-rule="evenodd"/>
+      <line x1="540" y1="575" x2="720" y2="840" stroke="url(#qg)" stroke-width="170" stroke-linecap="round"/>
+    </g>
+
+    <!-- Tight glow -->
+    <g opacity="0.6" filter="url(#glow1)">
+      <path d="M470 80A350 350 0 1 0 470 780A350 350 0 1 0 470 80ZM470 270A160 160 0 1 1 470 590A160 160 0 1 1 470 270Z" fill="url(#qg)" fill-rule="evenodd"/>
+      <line x1="540" y1="575" x2="720" y2="840" stroke="url(#qg)" stroke-width="170" stroke-linecap="round"/>
+    </g>
+
+    <!-- Crisp Q bowl -->
+    <path d="M470 80A350 350 0 1 0 470 780A350 350 0 1 0 470 80ZM470 270A160 160 0 1 1 470 590A160 160 0 1 1 470 270Z" fill="url(#qg)" fill-rule="evenodd"/>
+
+    <!-- Tail shadow -->
+    <line x1="540" y1="575" x2="720" y2="840" stroke="rgba(0,0,0,0.55)" stroke-width="190" stroke-linecap="round" filter="url(#tlift)"/>
+    <!-- Dark border -->
+    <line x1="540" y1="575" x2="720" y2="840" stroke="rgba(0,0,0,0.4)" stroke-width="190" stroke-linecap="round"/>
+    <!-- Gradient tail -->
+    <line x1="540" y1="575" x2="720" y2="840" stroke="url(#tg)" stroke-width="170" stroke-linecap="round"/>
+    <!-- Specular highlight -->
+    <ellipse cx="575" cy="640" rx="70" ry="100" fill="url(#shine)" clip-path="url(#tc)" transform="rotate(-38,575,640)"/>
+
+    <!-- Top-edge light -->
+    <rect x="0" y="0" width="1024" height="2" fill="rgba(255,255,255,0.04)"/>
+  </g>
+</svg>
